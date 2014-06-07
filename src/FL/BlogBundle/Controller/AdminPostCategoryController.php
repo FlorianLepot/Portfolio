@@ -53,7 +53,7 @@ class AdminPostCategoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_posts_categories_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_posts_categories'));
         }
 
         return array(
@@ -228,6 +228,26 @@ class AdminPostCategoryController extends Controller
         return $this->redirect($this->generateUrl('admin_posts_categories'));
     }
 
+    /**
+     * Deletes a Post entity.
+     *
+     * @Route("/{id}/delete", name="admin_posts_categories_delete_get")
+     * @Method("GET")
+     */
+    public function deleteGetAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FLBlogBundle:PostCategory')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find PostCategory entity.');
+        }
+
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('admin_posts_categories'));
+    }
     /**
      * Creates a form to delete a PostCategory entity by id.
      *

@@ -1,0 +1,87 @@
+{% block form_row %}
+  {% spaceless %}
+    <div class="form-group {{ errors|length > 0 ? 'has-error' : '' }}">
+      {{ form_label(form) }}
+      {{ form_widget(form) }}
+      {{ form_errors(form) }}
+    </div>
+  {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% if not compound %}
+        {% set label_attr = label_attr|merge({'for': id}) %}
+    {% endif %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+{% endblock form_label %}
+
+{% block textarea_widget %}
+  {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+  <textarea class="form-control" {{ block('widget_attributes') }} >{% if value is not empty %}{{ value }}{% endif %}</textarea>
+{% endblock textarea_widget %}
+
+{% block form_widget_simple %}
+  {% set type = type|default('text') %}
+  {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+  <input type="{{ type }}" class="{{ attr['class'] }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock form_widget_simple %}
+
+{% block choice_widget_options %}
+  {% spaceless %}
+    {% for group_label, choice in options %}
+      {% if choice is iterable %}
+        <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+          {% set options = choice %}
+          {{ block('choice_widget_options') }}
+        </optgroup>
+      {% else %}
+        <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
+      {% endif %}
+    {% endfor %}
+  {% endspaceless %}
+{% endblock choice_widget_options %}
+
+{% block choice_widget_collapsed %}
+  {% spaceless %}
+    <select class="form-control" {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+      {% if empty_value is not none %}
+        <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+      {% endif %}
+      {% if preferred_choices|length > 0 %}
+        {% set options = preferred_choices %}
+        {{ block('choice_widget_options') }}
+        {% if choices|length > 0 and separator is not none %}
+          <option disabled="disabled">{{ separator }}</option>
+        {% endif %}
+      {% endif %}
+      {% set options = choices %}
+      {{ block('choice_widget_options') }}
+    </select>
+  {% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block form_errors %}
+{% spaceless %}
+  {% if errors|length > 0 %}
+    <span class="help-block">
+      {% for error in errors %}
+        {{
+          error.messagePluralization is null
+            ? error.messageTemplate|trans(error.messageParameters, 'validators')
+            : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+        }}
+      {% endfor %}
+    </span>
+  {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
+
+{% block button_row %}
+{% spaceless %}
+    {{ form_widget(form) }}
+{% endspaceless %}
+{% endblock button_row %}

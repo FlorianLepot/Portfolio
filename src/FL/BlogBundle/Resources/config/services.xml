@@ -17,4 +17,12 @@
         </service>
     </services>
     -->
+
+    <services>
+        <service id="fl_blog.upload_listener" class="FL\BlogBundle\EventListener\UploadListener">
+            <argument type="service" id="doctrine" />
+            <argument type="service" id="service_container" />
+            <tag name="kernel.event_listener" event="oneup_uploader.post_persist" method="onUpload" />
+        </service>
+    </services>
 </container>

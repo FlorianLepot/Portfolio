@@ -1,0 +1,3 @@
+{% for file in files %}
+    <a href="{{ path('files_year_subject_category', { 'slug': subject.slug, 'category': file.name }) }}">{{ file.name }}</a><br>
+{% endfor %}

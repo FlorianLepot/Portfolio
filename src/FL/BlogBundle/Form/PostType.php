@@ -15,17 +15,20 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('slug')
-            ->add('teaser')
-            ->add('content')
-            ->add('datePublish')
-            ->add('dateEdit')
-            ->add('author')
-            ->add('published')
+            ->add('name', null, array('label' => 'Nom'))
+            ->add('slug', null, array('label' => 'Slug'))
+            ->add('teaser', null, array('label' => 'Introduction'))
+            ->add('content', null, array('label' => 'Contenu'))
+            //->add('image')
+            ->add('published', null, array('label' => 'Publié ?'))
+            ->add('category', 'entity', array(
+                'class' => 'FLBlogBundle:PostCategory',
+                'property' => 'name',
+                'label' => 'Catégorie'
+            ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

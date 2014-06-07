@@ -1,43 +1,45 @@
-{% extends '::base.html.twig' %}
+{% extends "FLBlogBundle::admin_layout.html.twig" %}
 
-{% block body -%}
-    <h1>PostCategory list</h1>
+{% block menuBlog %}class="active"{% endblock %}
+{% block menuBlogPostsCategories %}class="active"{% endblock %}
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('admin_posts_categories_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.slug }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_posts_categories_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_posts_categories_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+{% block body %}
+<section class="panel">
+    <header class="panel-heading">
+        Liste des catégories
+        <span class="tools pull-right">
+            <a href="javascript:;" class="fa fa-chevron-down"></a>
+         </span>
+    </header>
+    <div class="panel-body">
+        <table class="table  table-hover general-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Slug</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('admin_posts_categories_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.name }}</td>
+                    <td>{{ entity.slug }}</td>
+                    <td>
+                        <a href="{{ path('admin_posts_categories_edit', { 'id': entity.id }) }}"  class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+                        <a href="{{ path('admin_posts_categories_delete_get', { 'id': entity.id }) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('admin_posts_categories_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+        <a href="{{ path('admin_posts_categories_new') }}" class="btn btn-success"><i class="fa fa-plus"></i>
+            Créer une catégorie
+        </a>
+
+    </div>
+</section>
+{% endblock %}

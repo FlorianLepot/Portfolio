@@ -9,20 +9,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/blog")
+     * @Route("/blog", name="blog")
      * @Template()
      */
     public function indexAction()
     {
-        return array();
-    }
+        $em = $this->getDoctrine()->getManager();
+        $posts = $em->getRepository('FLBlogBundle:Post')->findAll();
 
-    /**
-     * @Route("/blog/post/{id}")
-     * @Template()
-     */
-    public function viewAction($id)
-    {
-        return array();
+        return array(
+            'posts' => $posts
+        );
     }
 }

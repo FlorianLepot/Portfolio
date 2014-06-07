@@ -35,6 +35,7 @@ class AdminPostController extends Controller
             'entities' => $entities,
         );
     }
+
     /**
      * Creates a new Post entity.
      *
@@ -50,6 +51,10 @@ class AdminPostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $entity->setDatePublish(new \DateTime);
+            $entity->setAuthor($this->getUser());
+
             $em->persist($entity);
             $em->flush();
 
@@ -202,6 +207,7 @@ class AdminPostController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Post entity.
      *
@@ -224,6 +230,27 @@ class AdminPostController extends Controller
             $em->remove($entity);
             $em->flush();
         }
+
+        return $this->redirect($this->generateUrl('admin_posts'));
+    }
+
+    /**
+     * Deletes a Post entity.
+     *
+     * @Route("/{id}/delete", name="admin_posts_delete_get")
+     * @Method("GET")
+     */
+    public function deleteGetAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('FLBlogBundle:Post')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Post entity.');
+        }
+
+        $em->remove($entity);
+        $em->flush();
 
         return $this->redirect($this->generateUrl('admin_posts'));
     }

@@ -1,55 +1,48 @@
-{% extends '::base.html.twig' %}
+{% extends "FLBlogBundle::admin_layout.html.twig" %}
 
-{% block body -%}
-    <h1>Post list</h1>
+{% block menuBlog %}class="active"{% endblock %}
+{% block menuBlogPosts %}class="active"{% endblock %}
 
-    <table class="records_list">
-        <thead>
+{% block body %}
+<section class="panel">
+    <header class="panel-heading">
+        Liste des articles
+        <span class="tools pull-right">
+            <a href="javascript:;" class="fa fa-chevron-down"></a>
+         </span>
+    </header>
+    <div class="panel-body">
+        <table class="table  table-hover general-table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Slug</th>
-                <th>Teaser</th>
-                <th>Content</th>
-                <th>Datepublish</th>
-                <th>Dateedit</th>
-                <th>Author</th>
-                <th>Published</th>
+                <th> #</th>
+                <th>Nom de l'article</th>
+                <th>Commentaires</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('admin_posts_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>{{ entity.slug }}</td>
-                <td>{{ entity.teaser }}</td>
-                <td>{{ entity.content }}</td>
-                <td>{% if entity.datePublish %}{{ entity.datePublish|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.dateEdit %}{{ entity.dateEdit|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.author }}</td>
-                <td>{{ entity.published }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('admin_posts_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('admin_posts_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('admin_posts_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td><a href="{{ path('admin_posts_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                    <td>3</td>
+                    <td><span class="label label-success label-mini"><i class="fa fa-check"></i></span></td>
+                    <td>
+                        <a href="{{ path('admin_posts_edit', { 'id': entity.id }) }}"  class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+                        <a href="{{ path('admin_posts_delete_get', { 'id': entity.id }) }}"  class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('admin_posts_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+
+        <a href="{{ path('admin_posts_new') }}" class="btn btn-success"><i class="fa fa-plus"></i>
+            Créer un article
+        </a>
+
+    </div>
+</section>
+{% endblock %}

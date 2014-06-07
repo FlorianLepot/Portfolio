@@ -59,21 +59,32 @@ class Post
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_edit", type="datetime")
+     * @ORM\Column(name="date_edit", type="datetime", nullable=true)
      */
     private $dateEdit;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="author", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="FL\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
+     * @ORM\ManyToOne(targetEntity="FL\BlogBundle\Entity\PostCategory")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
+    /**
+    * @ORM\OneToOne(targetEntity="FL\BlogBundle\Entity\Image", cascade={"persist", "merge", "remove"})
+    * @ORM\JoinColumn(nullable=false)
+    */
+    private $image;
+
+    /**
      * @var boolean
      *
-     * @ORM\Column(name="published", type="boolean")
+     * @ORM\Column(name="published", type="boolean", nullable=true)
      */
     private $published;
 
@@ -270,5 +281,51 @@ class Post
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \FL\BlogBundle\Entity\Image $image
+     * @return Post
+     */
+    public function setImage(\FL\BlogBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \FL\BlogBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \FL\BlogBundle\Entity\PostCategory $category
+     * @return Post
+     */
+    public function setCategory(\FL\BlogBundle\Entity\PostCategory $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \FL\BlogBundle\Entity\PostCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

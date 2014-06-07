@@ -1,0 +1,152 @@
+{% extends "FLBlogBundle::layout.html.twig" %}
+
+{% block body %}
+
+{% render url('posts_view_content', {'id': post.id}) %}
+
+<div class="panel">
+  <div class="panel-body ">
+    <div class="media blog-cmnt">
+      <a href="javascript:;" class="pull-left">
+        <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-avatar.jpg') }}" class="media-object">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <a href="#">jones</a>
+        </h4>
+        <p class="mp-less">
+          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{#<div class="panel">
+  <div class="panel-body">
+    <h1 class="text-center cmnt-head">5 Comments</h1>
+    <div class="media blog-cmnt">
+      <a href="javascript:;" class="pull-left">
+        <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-avatar-2.jpg') }}" class="media-object">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <a href="#">jones</a>
+        </h4>
+        <div class="bl-status">
+          <span class="pull-left">About 10 Min ago</span>
+          <a href="#" class="pull-right reply">Reply</a>
+        </div>
+        <p class="mp-less">
+          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit.
+        </p>
+      </div>
+    </div>
+    <div class="media blog-cmnt">
+      <a href="javascript:;" class="pull-left">
+        <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-avatar.jpg') }}" class="media-object">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <a href="#">jones</a>
+        </h4>
+        <div class="bl-status">
+          <span class="pull-left">About 10 Min ago</span>
+          <a href="#" class="pull-right reply">Reply</a>
+        </div>
+        <p class="mp-less">
+          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit.
+        </p>
+        <div class="media blog-cmnt">
+          <a href="javascript:;" class="pull-left">
+            <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-avatar-2.jpg') }}" class="media-object-child">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <a href="#">jones</a>
+            </h4>
+            <div class="bl-status">
+              <span class="pull-left">About 10 Min ago</span>
+              <!--<a href="#" class="pull-right reply">Reply</a>-->
+            </div>
+            <p class="mp-less">
+              Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit.
+            </p>
+            <div class="media blog-cmnt">
+              <a href="javascript:;" class="pull-left">
+                <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-avatar.jpg') }}" class="media-object-child">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">
+                    <a href="#">gomez</a>
+                </h4>
+                <div class="bl-status">
+                  <span class="pull-left">About 10 Min ago</span>
+                  <!--<a href="#" class="pull-right reply">Reply</a>-->
+                </div>
+                <p class="mp-less">
+                  Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit.
+                </p>
+                <div class="media blog-cmnt">
+                  <a href="javascript:;" class="pull-left">
+                    <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-avatar-2.jpg') }}" class="media-object-child">
+                  </a>
+                  <div class="media-body">
+                    <h4 class="media-heading">
+                      <a href="#">gomez</a>
+                    </h4>
+                    <div class="bl-status">
+                      <span class="pull-left">About 10 Min ago</span>
+                      <!--<a href="#" class="pull-right reply">Reply</a>-->
+                    </div>
+                    <p class="mp-less">
+                      Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit.
+                    </p>
+                    <div class="media blog-cmnt">
+                      <a href="javascript:;" class="pull-left">
+                        <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-avatar.jpg') }}" class="media-object-child">
+                      </a>
+                      <div class="media-body">
+                        <h4 class="media-heading">
+                          <a href="#">gomez</a>
+                        </h4>
+                        <div class="bl-status">
+                          <span class="pull-left">About 10 Min ago</span>
+                          <!--<a href="#" class="pull-right reply">Reply</a>-->
+                        </div>
+                        <p class="mp-less">
+                          Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam,
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>#}
+<div class="panel" id="comments">
+  <div class="panel-body">
+      <h1 class="text-center cmnt-head ">Laissez un commentaire !</h1>
+      <div id="disqus_thread"></div>
+
+      <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'florianl-blog'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+  </div>
+</div>
+{% endblock %}

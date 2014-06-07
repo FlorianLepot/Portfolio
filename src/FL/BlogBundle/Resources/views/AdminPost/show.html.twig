@@ -1,60 +1,66 @@
-{% extends '::base.html.twig' %}
+{% extends "FLBlogBundle::admin_layout.html.twig" %}
 
-{% block body -%}
-    <h1>Post</h1>
+{% block menuBlog %}class="active"{% endblock %}
+{% block menuBlogPosts %}class="active"{% endblock %}
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ entity.name }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ entity.slug }}</td>
-            </tr>
-            <tr>
-                <th>Teaser</th>
-                <td>{{ entity.teaser }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ entity.content }}</td>
-            </tr>
-            <tr>
-                <th>Datepublish</th>
-                <td>{{ entity.datePublish|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Dateedit</th>
-                <td>{{ entity.dateEdit|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Author</th>
-                <td>{{ entity.author }}</td>
-            </tr>
-            <tr>
-                <th>Published</th>
-                <td>{{ entity.published }}</td>
-            </tr>
-        </tbody>
-    </table>
+{% block body %}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_posts') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('admin_posts_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+
+<section class="panel">
+    <header class="panel-heading">
+        <a href="{{ path('admin_posts_edit', { 'id': entity.id }) }}" class="btn btn-xs btn-warning"><i class="fa fa-pencil-square-o"></i> Modifier</a>
+        <a href="{{ path('admin_posts_edit', { 'id': entity.id }) }}" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Supprimer</a>
+        {#<li>{{ form(delete_form) }}</li>#}
+        <span style="margin-left: 15px;">{{ entity.name }}</span>
+        <span class="tools pull-right"><a href="javascript:;" class="fa fa-chevron-down"></a></span>
+    </header>
+    <div class="panel-body">
+        <table class="table  table-hover">
+            <tdead>
+                <tr>
+                    <td>Nom</td>
+                    <td>{{ entity.name }}</td>
+                </tr>
+                <tr>
+                    <td>Slug</td>
+                    <td>{{ entity.slug }}</td>
+                </tr>
+                <tr>
+                    <td>Date de publication</td>
+                    <td>{{ entity.datePublish|date('d/m/Y H:i:s') }}</td>
+                </tr>
+                <tr>
+                    <td>Dernière modification</td>
+                    <td>{{ entity.dateEdit|date('d/m/Y H:i:s') }}</td>
+                </tr>
+                <tr>
+                    <td>Auteur</td>
+                    <td>{{ entity.author }}</td>
+                </tr>
+                <tr>
+                    <td>Statut</td>
+                    <td><span class="label label-success label-mini"><i class="fa fa-check"></i></span> {{ entity.published }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="panel">
+    <header class="panel-heading">
+        Introduction
+    </header>
+    <div class="panel-body">
+        {{ entity.teaser|raw }}
+    </div>
+</section>
+
+<iframe src="{{ path('posts_view', {'id': entity.id}) }}" style="width: 100%; height: 100%; border: 1px solid #D2D2D2;" scrolling="no" id="iframe" onload="javascript:resizeIframe(this);"></iframe>
+
+<script language="javascript" type="text/javascript">
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
+
 {% endblock %}

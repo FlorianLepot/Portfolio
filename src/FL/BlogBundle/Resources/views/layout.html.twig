@@ -15,6 +15,7 @@
     <link href="{{ asset('bundles/flblog/css/default-theme.css') }}" type="text/css" rel="stylesheet">
 
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Raleway:900,300,200,100" rel="stylesheet" type="text/css">
   </head>
   <body class="blog-body">
@@ -71,51 +72,12 @@
           <div class="col-md-4">
             <div class="panel">
               <div class="panel-body">
-                <input type="text" placeholder="Search Blog" class="form-control blog-search">
+                <input type="text" placeholder="Rechercher" class="form-control blog-search">
                 <button class="btn btn-search"><i class="fa fa-search"></i></button>
               </div>
             </div>
-            <div class="panel">
-              <div class="panel-body">
-                <div class="blog-post">
-                  <h3>Latest Blog Post</h3>
-                  <div class="media">
-                    <a href="javascript:;" class="pull-left">
-                      <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-thumb-1.jpg') }}" class=" ">
-                    </a>
-                    <div class="media-body">
-                      <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                      <p>
-                        Donec id elit non mi porta gravida at eget metus amet int
-                      </p>
-                    </div>
-                  </div>
-                  <div class="media">
-                    <a href="javascript:;" class="pull-left">
-                      <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-thumb-2.jpg') }}" class=" ">
-                    </a>
-                    <div class="media-body">
-                      <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                      <p>
-                        Donec id elit non mi porta gravida at eget metus amet int
-                      </p>
-                    </div>
-                  </div>
-                  <div class="media">
-                    <a href="javascript:;" class="pull-left">
-                      <img alt="" src="{{ asset('bundles/flblog/img/blog/blog-thumb-3.jpg') }}" class=" ">
-                    </a>
-                    <div class="media-body">
-                      <h5 class="media-heading"><a href="javascript:;">02 May 2013 </a></h5>
-                      <p>
-                        Donec id elit non mi porta gravida at eget metus amet int
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="panel">
+            {% render url('posts_menu') %}
+            {# <div class="panel">
               <div class="panel-body">
                 <div class="blog-post">
                   <h3>recent comments</h3>
@@ -127,7 +89,7 @@
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> #}
             {% render url('categories_menu') %}
             <div class="panel">
               <div class="panel-body">
@@ -215,5 +177,41 @@
     <script src="{{ asset('bundles/flblog/js/prettify.js') }}"></script>
     <!-- Plugins Initialize Scripts -->
     <script src="{{ asset('bundles/flblog/js/blog-init.js') }}"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var disqusPublicKey = "CHxwy7c1QH4wjgLA8DZG6dAYu5QopNKdFlf9h8rz4AJaAPc4J80ZDSfDxQVo9yIp";
+        var disqusShortname = "florianl-blog"; // Replace with your own shortname
+
+        var urlArray = [];
+
+        $('.count-comments').each(function () {
+          var url = $(this).attr('data-disqus-url');
+          urlArray.push('link:' + url);
+        });
+
+        $.ajax({
+          type: 'GET',
+          url: "https://disqus.com/api/3.0/threads/set.jsonp",
+          data: { api_key: disqusPublicKey, forum : disqusShortname, thread : urlArray },
+          cache: false,
+          dataType: 'jsonp',
+          success: function (result) {
+
+            for (var i in result.response) {
+
+              var countText = " commentaires";
+              var count = result.response[i].posts;
+
+              if (count < 2)
+                countText = " commentaire";
+
+              $('span[data-disqus-url="' + result.response[i].link + '"]').html(count + countText);
+
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>

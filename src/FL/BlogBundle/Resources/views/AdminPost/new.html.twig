@@ -1,15 +1,133 @@
-{% extends '::base.html.twig' %}
+{% extends "FLBlogBundle::admin_layout.html.twig" %}
+{% form_theme form '::bootstrap_form_theme.html.twig' %}
+{#{% form_theme form 'FLBlogBundle:Form:admin.html.twig' %}#}
 
-{% block body -%}
-    <h1>Post creation</h1>
-
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('admin_posts') }}">
-            Back to the list
-        </a>
-    </li>
+{% block body %}
+<ul class="breadcrumb">
+    <li><a href="#"><i class="fa fa-home"></i> Administration</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Articles</a></li>
+    <li class="active">Création d'un article</li>
 </ul>
+<section class="panel">
+    <div class="panel-body">
+        <h2 style="margin-top: 5px; margin-bottom: 30px; padding-bottom: 13px; border-bottom: 1px solid #DDDDDD">Création d'un article</h2>
+
+        {{ form_start(form, { 'attr': { 'class': 'form-horizontal' } }) }}
+
+        <div class="form-group">
+            {{ form_label(form.name, null, { 'label_attr': { 'class': 'col-lg-2 col-sm-2 control-label' }}) }}
+            <div class="col-lg-8">
+                {{ form_widget(form.name) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.slug, null, { 'label_attr': { 'class': 'col-lg-2 col-sm-2 control-label' }}) }}
+            <div class="col-lg-8">
+                {{ form_widget(form.slug) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.category, null, { 'label_attr': { 'class': 'col-lg-2 col-sm-2 control-label' }}) }}
+            <div class="col-lg-8">
+                {{ form_widget(form.category) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 col-sm-2 control-label control-label" for="fl_blogbundle_post_teaser">Image</label>
+            <div class="col-lg-8">
+                <div id="dropzone" class="dropzone" style="border: 1px dashed grey;"></div>
+                <p style="margin-top:-20px; text-align:center;"><strong>Extensions autorisées : </strong> jpg, jpeg, gif, png<br />
+                <strong>Taille maximale autorisée : </strong> 32M</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-2 col-sm-2 control-label">
+                Status
+            </div>
+            <div class="col-lg-8">
+                <div class="checkbox">
+                    <label>
+                        {{ form_widget(form.published) }}
+                        {{ form_label(form.published) }}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form_label(form.teaser, null, { 'label_attr': { 'class': 'col-lg-2 col-sm-2 control-label' }}) }}
+            <div class="col-lg-8">
+                {{ form_widget(form.teaser) }}
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            {{ form_label(form.content, null, { 'label_attr': { 'class': 'col-lg-2 col-sm-2 control-label' }}) }}
+            <div class="col-lg-8">
+                {{ form_widget(form.content, { 'attr': { 'style': 'display: none;' } }) }}
+                <div class="cke_editable cke_editable_inline cke_contents_ltr" id="inline-editor-content" tabindex="0" spellcheck="false" role="textbox" aria-label="Éditeur de Texte Enrichi, editor2" title="Éditeur de Texte Enrichi, editor2" aria-describedby="cke_95" style="position: relative;">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, officia, accusantium ad et suscipit esse a rem dicta ab tempore consequuntur veritatis alias iste asperiores reprehenderit! Fugiat pariatur quos dolor! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, dignissimos ipsam pariatur molestias magnam suscipit est error maxime fugiat quo! Dolorem, quos quaerat cum magni culpa voluptates dolorum aliquid odio! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, mollitia, odio, fuga, ut harum dolores reiciendis repudiandae odit vel dignissimos assumenda provident. Odio ea magni rerum iste architecto necessitatibus eos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, voluptas, sed, officia quaerat quia repellendus corporis ut debitis nulla fugit corrupti nobis cupiditate ipsum rem adipisci voluptatibus ratione! Sunt, ipsa! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae, adipisci, iusto, quibusdam, totam accusamus incidunt suscipit sit odit facilis ipsum commodi blanditiis amet iste minima mollitia eligendi dolor architecto quasi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates rem delectus temporibus quae est tempore sed. Itaque, obcaecati autem recusandae accusamus libero magni quisquam soluta. Corporis perspiciatis molestias corrupti fuga.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-2">
+                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Enregistrer l'article</button>
+            </div>
+        </div>
+
+        {{ form_widget(form._token) }}
+        </form>
+    </div>
+</section>
+
+<script type="text/javascript" src="https://rawgithub.com/enyo/dropzone/master/downloads/dropzone.js"></script>
+
+<script type="text/javascript">
+var myDropzone = Dropzone.options.dropzone = {
+    url: "{{ oneup_uploader_endpoint('gallery') }}",
+    paramName: "file",
+    maxFilesize: 30, // MB
+    acceptedFiles: ".png, .jpeg, .jpg, .gif",
+    autoProcessQueue: true,
+    init: function() {
+        this.on("sending", function(file, xhr, formData) {
+            /*formData.append("apof_id", {{ entity.id }});
+            formData.append("upload_type", 'apof');*/
+        });
+    ;
+    }
+};
+</script>
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$('.cke_editable').click(function() {
+    console.log("coucou");
+    var name;
+    for(name in CKEDITOR.instances) {
+        var instance = CKEDITOR.instances[name];
+        if(this && this == instance.element.$) {
+            return;
+        }
+    }
+    $(this).attr('contenteditable', true);
+    CKEDITOR.inline(this);
+    CKEDITOR.config.extraPlugins = 'stylesheetparser';
+});
+</script>
 {% endblock %}

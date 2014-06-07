@@ -1,3 +1,8 @@
+fl_files:
+    resource: "@FLFilesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 fl_public:
     resource: "@FLPublicBundle/Controller/"
     type:     annotation
@@ -31,3 +36,7 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+oneup_uploader:
+    resource: .
+    type: uploader
