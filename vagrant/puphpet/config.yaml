@@ -1,16 +1,15 @@
----
 vagrantfile-local:
     vm:
         box: puphpet/debian75-x64
         box_url: puphpet/debian75-x64
         hostname: null
-        memory: '512'
+        memory: '1024'
         chosen_provider: virtualbox
         network:
-            private_network: 127.0.0.1
+            private_network: 10.0.0.201
             forwarded_port:
-                RS36T1JhAoOg:
-                    host: '6810'
+                MCXMo4HRwoiD:
+                    host: '6300'
                     guest: '22'
         provider:
             virtualbox:
@@ -32,9 +31,9 @@ vagrantfile-local:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            lQdcIajEaWor:
+            yirlo05kXBzO:
                 source: ../
-                target: /var/www
+                target: /var/www/portfolio
                 nfs: 'true'
         usable_port_range: 2200..2250
     ssh:
@@ -82,9 +81,11 @@ apache:
         - rewrite
         - ssl
     vhosts:
-        uyOhtR2aE1Dw:
+        OzsSc8UloNig:
             servername: portfolio.dev
-            docroot: /var/www/web
+            serveraliases:
+                - www.portfolio.dev
+            docroot: /var/www/portfolio/web
             port: '80'
             setenv:
                 - 'APP_ENV dev'
@@ -104,7 +105,7 @@ apache:
 nginx:
     install: 0
     vhosts:
-        fez5URQsjGX1:
+        fKsn8bJQSGcm:
             server_name: awesome.dev
             server_aliases:
                 - www.awesome.dev
@@ -155,9 +156,9 @@ drush:
 mysql:
     install: '1'
     root_password: root
-    adminer: 0
+    adminer: '1'
     databases:
-        vcpLxKeUjYzz:
+        zM6VIeKyaSpf:
             grant:
                 - ALL
             name: portfolio
