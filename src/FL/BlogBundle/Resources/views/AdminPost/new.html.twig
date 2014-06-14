@@ -116,8 +116,7 @@ var myDropzone = Dropzone.options.dropzone = {
 
 {% block javascripts %}
 <script>
-$('.cke_editable').click(function() {
-    console.log("coucou");
+$('#inline-editor-content').click(function() {
     var name;
     for(name in CKEDITOR.instances) {
         var instance = CKEDITOR.instances[name];
@@ -127,7 +126,24 @@ $('.cke_editable').click(function() {
     }
     $(this).attr('contenteditable', true);
     CKEDITOR.inline(this);
-    CKEDITOR.config.extraPlugins = 'stylesheetparser';
+    CKEDITOR.extraPlugins = 'stylesheetparser';
+
+    CKEDITOR.config.contentsCss = ["{{ asset('bundles/flblog/css/bootstrap.css') }}", "{{ asset('bundles/flblog/css/animate.css') }}", "{{ asset('bundles/flblog/css/prettify.css') }}", "{{ asset('bundles/flblog/css/font-awesome.css') }}", "{{ asset('bundles/flblog/css/superfish.css') }}", "{{ asset('bundles/flblog/css/blog.css') }}", "{{ asset('bundles/flblog/css/apps-reset.css') }}", "{{ asset('bundles/flblog/css/default-theme.css') }}"];
+
+    CKEDITOR.config.stylesSet = [];
 });
+</script>
+
+<script>
+    var oldVal = "";
+    $("#inline-editor-content").bind("DOMSubtreeModified", function() {
+        var currentVal = $(this).html();
+        if(currentVal == oldVal) {
+            return;
+        }
+
+        oldVal = currentVal;
+        $("#fl_blogbundle_post_content").val(currentVal);
+    });
 </script>
 {% endblock %}

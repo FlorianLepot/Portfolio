@@ -18,7 +18,7 @@ class PostType extends AbstractType
             ->add('name', null, array('label' => 'Nom'))
             ->add('slug', null, array('label' => 'Slug'))
             ->add('teaser', null, array('label' => 'Introduction'))
-            ->add('content', null, array('label' => 'Contenu'))
+            ->add('content', null, array('label' => 'Contenu', 'required' => false))
             //->add('image')
             ->add('published', null, array('label' => 'Publié ?'))
             ->add('category', 'entity', array(
