@@ -6,10 +6,10 @@ vagrantfile-local:
         memory: '1024'
         chosen_provider: virtualbox
         network:
-            private_network: 10.0.0.201
+            private_network: 10.0.0.202
             forwarded_port:
                 MCXMo4HRwoiD:
-                    host: '6300'
+                    host: '6202'
                     guest: '22'
         provider:
             virtualbox:
@@ -204,11 +204,11 @@ beanstalkd:
     beanstalk_console: 0
     binlogdir: /var/lib/beanstalkd/binlog
 rabbitmq:
-    install: '1'
+    install: 0
     settings:
         port: '5672'
 elastic_search:
-    install: '1'
+    install: 0
     settings:
         java_install: true
         autoupgrade: true
