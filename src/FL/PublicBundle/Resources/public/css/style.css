@@ -214,3 +214,9 @@ li a:hover, li a:focus {
 .btn-submit:hover {
 	background-color: rgba(255, 255, 255, 0);
 }
+
+.messages {
+	background-color: rgba(255, 255, 255, 0.25);
+	padding: 7px 10px 7px 10px;
+	margin-bottom: 25px;
+}

@@ -6,6 +6,7 @@
 	<title>Florian Lepot</title>
 	<meta name="description" content="Fullscreen backgrounds with centered content">
     <link href="{{ asset('bundles/flblog/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('bundles/flblog/css/font-awesome.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('bundles/flpublic/css/style.css') }}" rel="stylesheet" />
 </head>
 <body>
@@ -16,7 +17,7 @@
 		        <div class="subtitles"><em>&Eacute;tudiant en dernière année d'école d'ingénieur en informatique &amp; technologies du numérique</em></div>
 	        	<ul>
 	        		<li><a href="{{ path('homepage') }}">Accueil</a></li>
-	        		<li><a href="{{ path('blog') }}">Blog</a></li>
+	        		{#<li><a href="{{ path('blog') }}">Blog</a></li>#}
 	        		<li><a href="http://efrei.florianlepot.fr">Efrei</a></li>
 	        		<li><a href="{{ path('contact') }}">Contact</a></li>
 	        	</ul>
@@ -25,10 +26,10 @@
 	        	{% endblock %}
 
 	        	<div class="block-dark">
-	    			<a href="" class="links github"></a>
-	    			<a href="" class="links facebook"></a>
-	    			<a href="" class="links email"></a>
-	    			<a href="" class="links linkedin"></a>
+	    			<a href="https://github.com/Darkouu" class="links github" target="_blank"></a>
+	    			<a href="https://www.facebook.com/Florian.Darkouu.Lepot" class="links facebook" target="_blank"></a>
+	    			<a href="{{ path('contact') }}" class="links email"></a>
+	    			<a href="https://www.linkedin.com/pub/florian-lepot/6a/52b/200" class="links linkedin" target="_blank"></a>
 	            </div>
 	        </div>
 	    </div>

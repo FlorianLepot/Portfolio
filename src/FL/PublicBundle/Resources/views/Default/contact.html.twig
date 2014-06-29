@@ -4,7 +4,10 @@
 	<div class="block">
 		<div class="content">
 			<div class="main-title">Contactez-moi !</div>
-			<form class="form-horizontal" role="form">
+			{% if message is defined %}
+				<div class="messages">{{ message|raw }}</div>
+			{% endif %}
+			<form class="form-horizontal" role="form" method="POST" action="{{ path('contact') }}">
 			  <div class="form-group">
 			    <label for="name" class="col-sm-3 control-label">Votre nom &amp; prénom :</label>
 			    <div class="col-sm-7">
