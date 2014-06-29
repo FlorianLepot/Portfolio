@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<meta charset="utf-8">
+	<title>Florian Lepot</title>
+	<meta name="description" content="Fullscreen backgrounds with centered content">
+    <link href="{{ asset('bundles/flblog/css/bootstrap.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('bundles/flpublic/css/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+	<div class="fullscreen background" style="background-image:url('{{ asset('bundles/flpublic/img/bg.jpg') }}');" data-img-width="2848" data-img-height="2848">
+	    <div class="content-a">
+	        <div class="content-b">
+		        <div class="title">Florian Lepot</div>
+		        <div class="subtitles"><em>&Eacute;tudiant en dernière année d'école d'ingénieur en informatique &amp; technologies du numérique</em></div>
+	        	<ul>
+	        		<li><a href="{{ path('homepage') }}">Accueil</a></li>
+	        		<li><a href="{{ path('blog') }}">Blog</a></li>
+	        		<li><a href="http://efrei.florianlepot.fr">Efrei</a></li>
+	        		<li><a href="{{ path('contact') }}">Contact</a></li>
+	        	</ul>
+
+	        	{% block body %}
+	        	{% endblock %}
+
+	        	<div class="block">
+	    			<a href=""><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_gray-128.png" class="links"></a>
+	    			<a href=""><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/github_circle_gray-128.png" class="links"></a>
+	    			<a href=""><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/linkedin_circle_color-128.png" class="links"></a>
+	    			<a href=""><img src="https://cdn4.iconfinder.com/data/icons/miu-flat-social/60/mail-128.png" class="links"></a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<script>
+	/* fix vertical when not overflow
+	call fullscreenFix() if .fullscreen content changes */
+	function fullscreenFix(){
+	    var h = $('body').height();
+	    // set .fullscreen height
+	    $(".content-b").each(function(i){
+	        if($(this).innerHeight() <= h){
+	            $(this).closest(".fullscreen").addClass("not-overflow");
+	        }
+	    });
+	}
+	$(window).resize(fullscreenFix);
+	fullscreenFix();
+
+	/* resize background images */
+	function backgroundResize(){
+	    var windowH = $(window).height();
+	    $(".background").each(function(i){
+	        var path = $(this);
+	        // variables
+	        var contW = path.width();
+	        var contH = path.height();
+	        var imgW = path.attr("data-img-width");
+	        var imgH = path.attr("data-img-height");
+	        var ratio = imgW / imgH;
+	        // overflowing difference
+	        var diff = parseFloat(path.attr("data-diff"));
+	        diff = diff ? diff : 0;
+	        // remaining height to have fullscreen image only on parallax
+	        var remainingH = 0;
+	        if(path.hasClass("parallax")){
+	            var maxH = contH > windowH ? contH : windowH;
+	            remainingH = windowH - contH;
+	        }
+	        // set img values depending on cont
+	        imgH = contH + remainingH + diff;
+	        imgW = imgH * ratio;
+	        // fix when too large
+	        if(contW > imgW){
+	            imgW = contW;
+	            imgH = imgW / ratio;
+	        }
+	        //
+	        path.data("resized-imgW", imgW);
+	        path.data("resized-imgH", imgH);
+	        path.css("background-size", imgW + "px " + imgH + "px");
+	    });
+	}
+	$(window).resize(backgroundResize);
+	$(window).focus(backgroundResize);
+	backgroundResize();
+	</script>
+</body>
+</html>

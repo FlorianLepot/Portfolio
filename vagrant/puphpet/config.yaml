@@ -6,10 +6,10 @@ vagrantfile-local:
         memory: '1024'
         chosen_provider: virtualbox
         network:
-            private_network: 10.0.0.202
+            private_network: 10.0.0.215
             forwarded_port:
                 MCXMo4HRwoiD:
-                    host: '6202'
+                    host: '6215'
                     guest: '22'
         provider:
             virtualbox:
