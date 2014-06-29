@@ -68,8 +68,8 @@ body{
 	padding: 10px;
 }
 
-.block-white {
-	background-color: rgba(255, 255, 255, 0.25);
+.block-dark {
+	background-color: rgba(0, 0, 0, 0.4);
 	width: 900px;
 	margin-left: auto;
 	margin-right: auto;
@@ -126,7 +126,7 @@ li {
 }
 li a {
 	background-color: rgba(0, 0, 0, 0.3);
-	padding: 15px 30px 15px 30px;
+	padding: 12px 40px 12px 40px;
 	color: white;
 	text-decoration: none;
 }
@@ -134,16 +134,65 @@ li a:hover, li a:focus {
 	background-color: rgba(0, 0, 0, 0);
 	border: 5px solid rgba(0, 0, 0, 0.3);
 	color: white;
-	padding: 10px 25px 10px 25px;
+	padding: 7px 35px 7px 35px;
 	text-decoration: none;
 }
 
 .links {
 	margin-top: 3px;
-	height: 50px;
-	width: 50px;
 	margin-left: 25px;
 	margin-right: 25px;
+	height: 50px;
+	width: 50px;
+    display: inline-block;
+}
+
+.links.github {
+	background: url('../img/github.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.links.facebook {
+	background: url('../img/facebook.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.links.linkedin {
+	background: url('../img/linkedin.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.links.email {
+	background: url('../img/email.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.links.github:hover {
+	background: url('../img/github_dark.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.links.facebook:hover {
+	background: url('../img/facebook_dark.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.links.linkedin:hover {
+	background: url('../img/linkedin_dark.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
+}
+
+.links.email:hover {
+	background: url('../img/email_dark.png');
+	background-size: 50px 50px;
+    background-repeat: no-repeat;
 }
 
 .spaced-top {
