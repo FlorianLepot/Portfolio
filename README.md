@@ -1,8 +1,8 @@
 Portfolio
 ============
 Be careful, templates used are :
-http://themeforest.net/item/bucket-admin-bootstrap-3-responsive-flat-dashboard/6642985
-http://themeforest.net/item/resumex-html-multipurpose-one-page-portfolio/7184392
+- http://themeforest.net/item/bucket-admin-bootstrap-3-responsive-flat-dashboard/6642985
+- http://themeforest.net/item/resumex-html-multipurpose-one-page-portfolio/7184392
 
 ## Installation
 ### Download Portfolio
