@@ -10,9 +10,7 @@
       Par <a href="#">{{ posts[0].author.firstname }} {{ posts[0].author.lastname }}</a> | {{ posts[0].datePublish|date('d F Y à H:i') }} | <a  href="{{ path('posts_view', { 'id': posts[0].id }) }}#comments"><span class="count-comments" data-disqus-url="{{ url('posts_view', { 'id': posts[0].id }) }}"></span></a>
     </p>
     <div class="blog-img-wide">
-
-      <a href="{{ path('posts_view', { 'id': posts[0].id }) }}"><img src="{{ asset(posts[0].image.path) }}" alt=""></a>
-
+      <a href="{{ path('posts_view', { 'id': posts[0].id }) }}"><img src="{{ posts[0].image.webPath | imagine_filter('blog_post_preview') }}" alt=""></a>
     </div>
     <p>
       {{ posts[0].teaser|nl2br }}
@@ -35,27 +33,51 @@
     <a href="blog_details.html" class="more">Continue Reading</a>
   </div>
 </div> -->
-<div class="panel">
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-md-5">
-        <div class="blog-img-sm">
-          <img src="{{ asset('bundles/flblog/img/blog/blog-sm-img.jpg') }}" alt="">
+{% for post in posts %}
+  {% if loop.index0 != 0 %}
+    <div class="panel">
+      <div class="panel-body">
+        <div class="row">
+          {% if loop.index0 % 2 == 0 %}
+            <div class="col-md-5">
+              <div class="blog-img-sm">
+                <a href=""><img src="{{ posts.image.webPath | imagine_filter('blog_post_preview_small') }}" alt=""></a>
+              </div>
+            </div>
+            <div class="col-md-7">
+              <h1><a href="blog_details.html">Neque porro quisquam est qui dolo</a></h1>
+              <p class=" auth-row">
+                By <a href="#">Anthony Jones</a> | 27 December 2014 | <a href="#">5 Comments</a>
+              </p>
+              <p>
+                Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci.
+              </p>
+              <a href="blog_details.html" class="more">Continue Reading</a>
+            </div>
+            {% else %}
+              <div class="col-md-7">
+                <h1><a href="blog_details.html">Neque porro quisquam est qui dolo</a></h1>
+                <p class=" auth-row">
+                  By <a href="#">Anthony Jones</a> | 27 December 2014 | <a href="#">5 Comments</a>
+                </p>
+                <p>
+                  Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci.
+                </p>
+                <a href="blog_details.html" class="more">Continue Reading</a>
+              </div>
+              <div class="col-md-5">
+                <div class="blog-img-sm">
+                  <img src="{{ asset('bundles/flblog/img/blog/blog-sm-img.jpg') }}" alt="">
+                </div>
+              </div>
+            {% endif %}
+          </div>
         </div>
       </div>
-      <div class="col-md-7">
-        <h1><a href="blog_details.html">Neque porro quisquam est qui dolo</a></h1>
-        <p class=" auth-row">
-          By <a href="#">Anthony Jones</a> | 27 December 2014 | <a href="#">5 Comments</a>
-        </p>
-        <p>
-          Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci.
-        </p>
-        <a href="blog_details.html" class="more">Continue Reading</a>
-      </div>
     </div>
-  </div>
-</div>
+  {% endif %}
+{% endfor %}
+{#
 <div class="panel">
   <div class="panel-body text-center">
     <h1 class="mtop35"><a href="blog_details.html#">Neque porro quisquam est qui dolo rem ipsum quio</a></h1>
@@ -114,16 +136,16 @@
       By <a href="#">Anthony Jones</a> | 27 December 2014 | <a href="#">5 Comments</a>
     </p>
   </div>
-</div>
+</div> #}
 <div class="text-center">
   <ul class="pagination">
-    <li><a href="#">PREV</a></li>
+    {# <li><a href="#">PREV</a></li> #}
     <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
+   {#  <li><a href="#">2</a></li>
     <li><a href="#">3</a></li>
     <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">NEXT</a></li>
+    <li><a href="#">5</a></li> #}
+    {# <li><a href="#">NEXT</a></li> #}
   </ul>
 </div>
 

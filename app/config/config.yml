@@ -28,6 +28,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - "UProFileBundle::field.html.twig"
 
 # Assetic Configuration
 assetic:
@@ -74,7 +77,49 @@ fos_user:
     firewall_name: main
     user_class: FL\UserBundle\Entity\User
 
-oneup_uploader:
-    mappings:
-        gallery:
-            frontend: dropzone
+u_pro_file:
+    db_driver: orm
+    upload_dir: app/files # web/files is another example
+
+liip_imagine:
+    loaders:
+        default:
+            filesystem:
+                data_root: %kernel.root_dir%/../web/
+        filebundle:
+            filesystem:
+                data_root: ../app/files
+    filter_sets:
+        icon:
+            cache: ~
+            quality: 90
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+        image_fs:
+            cache: ~
+            quality: 90
+            data_loader: filebundle
+            filters:
+                thumbnail: { size: [100, 100], mode: outbound }
+        blog_post_main:
+            cache: ~
+            quality: 100
+            data_loader: filebundle
+        blog_post_preview:
+            cache: ~
+            quality: 100
+            data_loader: filebundle
+            filters:
+                thumbnail: { size: [500, 250], mode: outbound }
+        blog_post_preview_small:
+            cache: ~
+            quality: 100
+            data_loader: filebundle
+            filters:
+                thumbnail: { size: [150, 150], mode: outbound }
+        blog_post_list:
+            cache: ~
+            quality: 90
+            data_loader: filebundle
+            filters:
+                thumbnail: { size: [81, 81], mode: outbound }

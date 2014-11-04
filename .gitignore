@@ -11,3 +11,7 @@
 /composer.phar
 *~
 /vagrant/.vagrant/
+
+/app/files/*
+/web/media/*
+/web/uploads/*

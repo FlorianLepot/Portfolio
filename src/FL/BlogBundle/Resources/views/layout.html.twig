@@ -18,8 +18,8 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Raleway:900,300,200,100" rel="stylesheet" type="text/css">
   </head>
-  <body class="blog-body">
-    <div class="navigation clearfix">
+  <body class="blog-body" style="background: url('http://www.unsigneddesign.com/Seamless_background_textures/1200px/seamlesstexture1_1200.jpg') repeat center;">
+    <div class="navigation clearfix" style="background-color: rgba(0, 0, 0, 0.3);">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -29,26 +29,14 @@
                   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="fa fa-bars"></span>
                   </button>
-                  <a class="sticky-logo" href="index.html">
-                    <img src="{{ asset('bundles/flblog/img/sticky-logo.png') }}" alt=""/>
+                  <a class="sticky-logo" href="{{ path('homepage') }}" style="font-weight: bold; font-size: 18px; color: white; font-family: sans-serif;">
+                    Florian Lepot
                   </a>
                 </div>
                 <div class="navbar-collapse collapse ddsmoothmenu" id="smoothmenu1">
                   <ul class="nav navbar-nav pull-right top-nav sf-menu">
-                    <li><a href="index.html#slides">Home</a></li>
-                    <li><a href="index.html#about-me">About Me</a></li>
-                    <li><a href="index.html#skill-section">Skill</a></li>
-                    <li><a href="index.html#experiences">Experiences</a></li>
-                    <li><a href="index.html#education">Education</a></li>
-                    <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="index.html#testimonial">Testimonial</a></li>
-                    <li><a href="index.html#blog">Blog</a>
-                    <ul>
-                    <li><a href="index.html#blog">Blog List</a></li>
-                    <li><a href="blog_listing.html" class="external">Blog Page</a></li>
-                    <li><a href="blog_details.html" class="external">Blog Details Page</a></li>
-                    </ul>
-                    </li>
+                    <li><a href="{{ path('homepage') }}">Accueil</a></li>
+                    <li><a href="{{ path('blog') }}">Blog</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                   </ul>
                 </div>
@@ -58,13 +46,12 @@
         </div>
       </div>
     </div>
-    <div class="blog-section">
+    <div class="blog-section" style="padding: 8px;">
       <div class="container">
         <div class="section-title">
           <h1 class="section-heading">Blog</h1>
-          <h2 class="section-subheading-nobg">Des trucs, des astuces, des coups de coeur et des projets !</h2>
         </div>
-        <div class="row blog">
+        <div class="row blog" style="margin-top: 60px;">
           <div class="col-md-8">
             {% block body %}
             {% endblock %}
@@ -213,5 +200,7 @@
         });
       });
     </script>
+
+    {% block javascripts %}{% endblock %}
   </body>
 </html>

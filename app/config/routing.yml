@@ -37,6 +37,9 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
-oneup_uploader:
-    resource: .
-    type: uploader
+u_pro_file:
+    resource: "@UProFileBundle/Resources/config/routing.yml"
+    prefix: /file
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

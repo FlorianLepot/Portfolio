@@ -19,7 +19,11 @@ class PostType extends AbstractType
             ->add('slug', null, array('label' => 'Slug'))
             ->add('teaser', null, array('label' => 'Introduction'))
             ->add('content', null, array('label' => 'Contenu', 'required' => false))
-            //->add('image')
+            ->add('image', 'u_pro_file', array(
+                'label' => 'Send file',
+                'validation' => 'file',
+                'selectButtonLabel' => 'Sélectionne une image',
+            ))
             ->add('published', null, array('label' => 'Publié ?'))
             ->add('category', 'entity', array(
                 'class' => 'FLBlogBundle:PostCategory',

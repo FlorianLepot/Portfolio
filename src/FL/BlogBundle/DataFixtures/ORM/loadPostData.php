@@ -43,7 +43,6 @@ class LoadPostData extends AbstractFixture implements OrderedFixtureInterface, C
 
 <p>Vestibulum lobortis nunc sollicitudin quam interdum, id mattis felis sodales. Suspendisse viverra sapien ipsum, et pretium metus convallis vel. Sed nec dolor vestibulum turpis iaculis pellentesque at et mauris. Morbi aliquam non diam eget placerat. Duis pulvinar est eu sem vestibulum, a ultricies arcu rutrum. Integer semper arcu vitae turpis varius, ac luctus ante blandit. Maecenas imperdiet viverra tortor sit amet tincidunt. Donec laoreet leo vel leo eleifend sagittis. Maecenas porttitor venenatis ante. Aliquam varius id est vel sagittis. Sed placerat mi in convallis consectetur.</p>',
       'author'     =>  'Florian',
-      'image'     =>  '537fbd144eade.jpg',
       'published'     =>  true
     ),
   );
@@ -55,7 +54,6 @@ class LoadPostData extends AbstractFixture implements OrderedFixtureInterface, C
   {
     foreach($this->postsDatas as $postData) {
       $author = $manager->getRepository('FLUserBundle:User')->findOneByUsername($postData['author']);
-      $image = $manager->getRepository('FLBlogBundle:Image')->findOneByName($postData['image']);
       $category = $manager->getRepository('FLBlogBundle:PostCategory')->findOneBySlug('divers');
 
       $post = new Post();
@@ -68,7 +66,6 @@ class LoadPostData extends AbstractFixture implements OrderedFixtureInterface, C
       $post->setDatePublish(new \DateTime());
       $post->setDateEdit(null);
       $post->setAuthor($author);
-      $post->setImage($image);
       $post->setPublished($postData['published']);
 
       $manager->persist($post);

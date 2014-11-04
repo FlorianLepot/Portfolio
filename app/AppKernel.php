@@ -23,8 +23,10 @@ class AppKernel extends Kernel
             new FL\UserBundle\FLUserBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
-            new Oneup\UploaderBundle\OneupUploaderBundle(),
             new FL\FilesBundle\FLFilesBundle(),
+
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            new UPro\FileBundle\UProFileBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

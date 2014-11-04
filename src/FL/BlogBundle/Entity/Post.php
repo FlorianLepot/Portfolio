@@ -76,9 +76,9 @@ class Post
     private $category;
 
     /**
-    * @ORM\OneToOne(targetEntity="FL\BlogBundle\Entity\Image", cascade={"persist", "merge", "remove"})
-    * @ORM\JoinColumn(nullable=false)
-    */
+     * @ORM\ManyToOne(targetEntity="UPro\FileBundle\Entity\File")
+     * @ORM\JoinColumn(nullable=true)
+     */
     private $image;
 
     /**
@@ -284,29 +284,6 @@ class Post
     }
 
     /**
-     * Set image
-     *
-     * @param \FL\BlogBundle\Entity\Image $image
-     * @return Post
-     */
-    public function setImage(\FL\BlogBundle\Entity\Image $image = null)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \FL\BlogBundle\Entity\Image
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Set category
      *
      * @param \FL\BlogBundle\Entity\PostCategory $category
@@ -327,5 +304,28 @@ class Post
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \UPro\FileBundle\Entity\File $image
+     * @return Post
+     */
+    public function setImage(\UPro\FileBundle\Entity\File $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \UPro\FileBundle\Entity\File 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

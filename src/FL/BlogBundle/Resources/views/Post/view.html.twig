@@ -150,3 +150,28 @@
   </div>
 </div>
 {% endblock %}
+
+
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('bundles/flblog/epiceditor/js/epiceditor.js') }}"></script>
+
+  <script>
+    var opts = {
+      basePath: '..',
+      clientSideStorage: false,
+      theme: {
+        base: '{{ asset('../../bundles/flblog/epiceditor/themes/base/epiceditor.css') }}',
+        preview: '{{ asset('../../bundles/flblog/epiceditor/themes/preview/blog.css') }}',
+        editor: '{{ asset('../../bundles/flblog/epiceditor/themes/editor/epic-dark.css') }}'
+      },
+      autogrow: true,
+      autogrow: {
+        minHeight: 200
+      },
+      textarea: 'fl_blogbundle_post_content',
+    }
+    var editor = new EpicEditor(opts).load().preview();
+  </script>
+{% endblock %}
