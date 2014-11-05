@@ -562,7 +562,17 @@
                 '</div>'
 
     // The previewer is just an empty box for the generated HTML to go into
-    , previewer: '<script src="/bundles/flblog/js/prettify.js"></script><div id="epiceditor-preview" class="blog"></div>'
+    , previewer: '<script type="text/javascript">'
+      + 'window.onload = function() {'
+      +     'if (parent) {'
+      +         'var oHead = document.getElementsByTagName("head")[0];'
+      +         'var arrStyleSheets = parent.document.getElementsByTagName("style");'
+      +         'for (var i = 0; i < arrStyleSheets.length; i++)'
+      +             'oHead.appendChild(arrStyleSheets[i].cloneNode(true));'
+      +     '}'
+      + '}'
+      + '</script>'
+      + '<div id="epiceditor-preview"></div>'
     , editor: '<!doctype HTML>'
     };
 
@@ -2484,9 +2494,9 @@ InlineLexer.prototype.output = function(src) {
     // code
     if (cap = this.rules.code.exec(src)) {
       src = src.substring(cap[0].length);
-      out += ''
+      out += '<code>'
         + escape(cap[2], true)
-        + '';
+        + '</code>';
       continue;
     }
 
@@ -2674,9 +2684,15 @@ Parser.prototype.tok = function() {
         this.token.text = escape(this.token.text, true);
       }
 
-      return '<pre class="css prettyprint linenums">'
+      return '<pre><code'
+        + (this.token.lang
+        ? ' class="lang-'
+        + this.token.lang
+        + '"'
+        : '')
+        + '>'
         + this.token.text
-        + '</pre>\n';
+        + '</code></pre>\n';
     }
     case 'table': {
       var body = ''

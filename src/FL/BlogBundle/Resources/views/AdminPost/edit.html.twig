@@ -76,7 +76,7 @@
         <div class="form-group">
           {{form_label(edit_form.content, null, { 'label_attr': { 'class': 'col-lg-2 col-sm-2 control-label' }}) }}
           <div class="col-lg-8">
-            <div id="epiceditor" style="height: 500px;"></div>
+            <div id="epiceditor" style="height: 300px;"></div>
           </div>
         </div>
         <div class="hide">
@@ -99,23 +99,25 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('bundles/flblog/epiceditor/js/epiceditor.js') }}"></script>
+{{ parent() }}
 
-    <script>
-      var opts = {
-        basePath: '..',
-        clientSideStorage: false,
-        theme: {
-          base: '{{ asset('../../bundles/flblog/epiceditor/themes/base/epiceditor.css') }}',
-          preview: '{{ asset('../../bundles/flblog/epiceditor/themes/preview/blog.css') }}',
-          editor: '{{ asset('../../bundles/flblog/epiceditor/themes/editor/epic-dark.css') }}'
-        },
-        autogrow: true,
-        autogrow: {
-          minHeight: 200
-        },
-        textarea: 'fl_blogbundle_post_content',
-      }
-      var editor = new EpicEditor(opts).load();
-    </script>
+<script src="{{ asset('bundles/flblog/epiceditor/js/epiceditor.js') }}"></script>
+
+<script>
+  var opts = {
+    basePath: '..',
+    clientSideStorage: false,
+    theme: {
+      base: '{{ asset('../../bundles/flblog/epiceditor/themes/base/epiceditor.css') }}',
+      preview: '{{ asset('../../bundles/flblog/epiceditor/themes/preview/github.css') }}',
+      editor: '{{ asset('../../bundles/flblog/epiceditor/themes/editor/epic-dark.css') }}'
+    },
+    autogrow: true,
+    autogrow: {
+      minHeight: 200
+    },
+    textarea: 'fl_blogbundle_post_content',
+  }
+  var editor = new EpicEditor(opts).load();
+</script>
 {% endblock %}
