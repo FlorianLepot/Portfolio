@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class PostCategoryController extends Controller
 {
     /**
-     * @Route("/categories/menu/{limit}", name="categories_menu")
+     * @Route("/blog/categories/menu/{limit}", name="categories_menu")
      * @Template("FLBlogBundle:Category:menu_list.html.twig")
      */
     public function menuListAction($limit = null)
